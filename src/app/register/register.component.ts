@@ -52,4 +52,11 @@ export class RegisterComponent {
     this.wordPairs.sort((a, b) => a[colName].localeCompare(b[colName]));
   }
 
+  // TODO Make a service for this
+  addSampleData(): void {
+    this.wordPairs.push(
+      { key: 'Beispiel', value: 'example' },
+    )
+  }
+
 }
