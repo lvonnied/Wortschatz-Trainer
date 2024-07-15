@@ -7,12 +7,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let pair of wordPairs | keyvalue">
+        <tr *ngFor="let pair of wordPairs; let i = index">
             <td>{{ pair.key }}</td>
             <td>{{ pair.value }}</td>
             <td>
                 <button disabled>Edit</button>
-                <button (click)="removeWordPair(pair.key)">Delete</button>
+                <button (click)="removeWordPair(i)">Delete</button>
             </td>
         </tr>
     </tbody>
