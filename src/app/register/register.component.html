@@ -1,0 +1,26 @@
+<table>
+    <thead>
+        <tr>
+            <th>Word</th>
+            <th>Translation</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pair of wordPairs | keyvalue">
+            <td>{{ pair.key }}</td>
+            <td>{{ pair.value }}</td>
+            <td>
+                <button disabled>Edit</button>
+                <button (click)="removeWordPair(pair.key)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div>
+    <input type="text" [(ngModel)]="key" placeholder="Front">
+    <input type="text" [(ngModel)]="value" placeholder="Back">
+    <button (click)="addWordPair()">Add</button>
+</div>
+<div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
