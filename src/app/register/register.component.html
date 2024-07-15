@@ -1,28 +1,32 @@
-<table>
-    <thead>
-        <tr>
-            <th (click)="sort('key')">Word</th>
-            <th (click)="sort('value')">Translation</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let pair of wordPairs; let i = index">
-            <td>{{ pair.key }}</td>
-            <td>{{ pair.value }}</td>
-            <td>
-                <button disabled>Edit</button>
-                <button (click)="removeWordPair(i)">Delete</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="container">
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th (click)="sort('key')">Word</th>
+                    <th (click)="sort('value')">Translation</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pair of wordPairs; let i = index">
+                    <td>{{ pair.key }}</td>
+                    <td>{{ pair.value }}</td>
+                    <td>
+                        <button disabled>Edit</button>
+                        <button (click)="removeWordPair(i)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-<div>
-    <input type="text" [(ngModel)]="key" placeholder="Front">
-    <input type="text" [(ngModel)]="value" placeholder="Back">
-    <button (click)="addWordPair()">Add</button>
+    <div class="word-form">
+        <input type="text" [(ngModel)]="key" placeholder="Front">
+        <input type="text" [(ngModel)]="value" placeholder="Back">
+        <button (click)="addWordPair()">Add</button>
+    </div>
+
+    <button (click)="deleteAllWordPairs()">Reset List</button>
+    <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
 </div>
-
-<button (click)="deleteAllWordPairs()">Reset List</button>
-<div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
