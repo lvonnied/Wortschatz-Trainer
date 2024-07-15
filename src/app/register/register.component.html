@@ -1,8 +1,8 @@
 <table>
     <thead>
         <tr>
-            <th>Word</th>
-            <th>Translation</th>
+            <th (click)="sort('key')">Word</th>
+            <th (click)="sort('value')">Translation</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -23,4 +23,6 @@
     <input type="text" [(ngModel)]="value" placeholder="Back">
     <button (click)="addWordPair()">Add</button>
 </div>
+
+<button (click)="deleteAllWordPairs()">Reset List</button>
 <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>

@@ -40,8 +40,16 @@ export class RegisterComponent {
     }
   }
 
-  removeWordPair(key: string) {
-    this.wordPairs.delete(key);
+  removeWordPair(index: number): void {
+    this.wordPairs.splice(index, 1);
+  }
+
+  deleteAllWordPairs(): void {
+    this.wordPairs = [];
+  }
+
+  sort(colName: 'key' | 'value'): void {
+    this.wordPairs.sort((a, b) => a[colName].localeCompare(b[colName]));
   }
 
 }
