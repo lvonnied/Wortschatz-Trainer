@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ExamService } from './services/exam.service';
 
 interface ILink {
   path: string;
@@ -22,4 +23,11 @@ export class AppComponent {
     { path: "exam", label: "Exam" },
   ];
   activePath = this.links[0].path;
+  examStarted = false;
+
+  constructor(private examService: ExamService) {
+    this.examService.examStarted$.subscribe((started) => {
+      this.examStarted = started;
+    });
+  }
 }
