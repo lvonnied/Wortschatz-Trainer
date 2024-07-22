@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-// TODO Move this to a separate file
-interface WordPair {
-  key: string,
-  value: string,
-}
+import { WordpairService } from '../services/wordpair.service';
+import { WordPair } from '../models/WordPair';
 
 @Component({
   selector: 'app-register',
@@ -16,24 +12,20 @@ interface WordPair {
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+  constructor(private wordPairService: WordpairService) {
+    this.wordPairs = this.wordPairService.getWordPairs();
+  }
 
   key: string = '';
   value: string = '';
   errorMessage: string = '';
-
-  wordPairs: WordPair[] = [
-    // ! Sample data
-    { key: 'Haus', value: 'house' },
-    { key: 'Baum', value: 'tree' },
-    { key: 'Wolke', value: 'cloud' },
-    { key: 'Stift', value: 'pen' }
-  ];
+  wordPairs: WordPair[] = [];
 
   addWordPair(): void {
     if (this.key.trim() === '' || this.value.trim() === '') {
       this.errorMessage = 'Both fields are required.';
     } else {
-      this.wordPairs.push({ key: this.key, value: this.value });
+      this.wordPairService.addWordPair(this.key, this.value);
       this.key = '';
       this.value = '';
       this.errorMessage = '';
@@ -41,22 +33,19 @@ export class RegisterComponent {
   }
 
   removeWordPair(index: number): void {
-    this.wordPairs.splice(index, 1);
+    this.wordPairService.removeWordPair(index);
   }
 
   deleteAllWordPairs(): void {
-    this.wordPairs = [];
+    this.wordPairService.deleteAllWordPairs();
   }
 
   sort(colName: 'key' | 'value'): void {
     this.wordPairs.sort((a, b) => a[colName].localeCompare(b[colName]));
   }
 
-  // TODO Make a service for this
   addSampleData(): void {
-    this.wordPairs.push(
-      { key: 'Beispiel', value: 'example' },
-    )
+    this.wordPairService.addSampleData();
   }
 
 }
