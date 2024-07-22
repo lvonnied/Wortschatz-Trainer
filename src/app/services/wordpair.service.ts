@@ -6,7 +6,7 @@ import { RandomwordpairService } from './randomwordpair.service';
   providedIn: 'root'
 })
 export class WordpairService {
-  private wordPairs: WordPair[] = [{ key: "gugus", value: "gugus" }];
+  private wordPairs: WordPair[] = [];
 
   getWordPairs(): WordPair[] {
     return this.wordPairs;
