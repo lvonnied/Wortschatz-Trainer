@@ -1,37 +1,44 @@
 import { Injectable } from '@angular/core';
 import { WordPair } from '../models/WordPair';
 import { RandomwordpairService } from './randomwordpair.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WordpairService {
-  private wordPairs: WordPair[] = [];
+  private wordPairsSubject = new BehaviorSubject<WordPair[]>([]);
+  wordPairs$ = this.wordPairsSubject.asObservable();
+
+  constructor(private randomWordService: RandomwordpairService) { }
 
   getWordPairs(): WordPair[] {
-    return this.wordPairs;
+    return this.wordPairsSubject.getValue();
   }
 
   getRandomWordPair(): WordPair {
-    const randomIndex = Math.floor(Math.random() * this.wordPairs.length);
-    return this.wordPairs[randomIndex];
+    const wordPairs = this.getWordPairs();
+    const randomIndex = Math.floor(Math.random() * wordPairs.length);
+    return wordPairs[randomIndex];
   }
 
   addWordPair(key: string, value: string): void {
-    this.wordPairs.push({ key, value });
+    const currentWordPairs = this.getWordPairs();
+    this.wordPairsSubject.next([...currentWordPairs, { key, value }]);
   }
 
   removeWordPair(index: number): void {
-    this.wordPairs.splice(index, 1);
+    const currentWordPairs = this.getWordPairs();
+    currentWordPairs.splice(index, 1);
+    this.wordPairsSubject.next([...currentWordPairs]);
   }
 
   deleteAllWordPairs(): void {
-    this.wordPairs = [];
+    this.wordPairsSubject.next([]);
   }
 
   addSampleData(): void {
-    this.wordPairs.push(this.randomWordService.getRandomWordPair());
+    const currentWordPairs = this.getWordPairs();
+    this.wordPairsSubject.next([...currentWordPairs, this.randomWordService.getRandomWordPair()]);
   }
-
-  constructor(private randomWordService: RandomwordpairService) { }
 }
