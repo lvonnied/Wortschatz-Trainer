@@ -25,6 +25,7 @@ export class AppComponent {
   activePath = this.links[0].path;
   examStarted = false;
 
+  // ? Does this belong in onInit?
   constructor(private examService: ExamService) {
     this.examService.examStarted$.subscribe((started) => {
       this.examStarted = started;
