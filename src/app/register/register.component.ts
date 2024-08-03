@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WordpairService } from '../services/wordpair.service';
@@ -11,7 +11,7 @@ import { WordPair } from '../models/WordPair';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   constructor(private wordPairService: WordpairService) {
     this.wordPairs = this.wordPairService.getWordPairs();
   }
@@ -20,6 +20,12 @@ export class RegisterComponent {
   value: string = '';
   errorMessage: string = '';
   wordPairs: WordPair[] = [];
+
+  ngOnInit(): void {
+    this.wordPairService.wordPairs$.subscribe((wordPairs) => {
+      this.wordPairs = wordPairs;
+    });
+  }
 
   addWordPair(): void {
     if (this.key.trim() === '' || this.value.trim() === '') {
