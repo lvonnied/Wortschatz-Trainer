@@ -3,16 +3,19 @@
         <p>Please add some word pairs to study.</p>
     </div>
     <ng-template #showStudy>
-        <div *ngIf="showKey; else showValue">
+        <div *ngIf="showKey; else showValue" class="word-display">
             <p>{{ currentWordPair.key }}</p>
         </div>
         <ng-template #showValue>
-            <p>{{ currentWordPair.value }}</p>
+            <div class="word-display">
+                <p>{{ currentWordPair.value }}</p>
+            </div>
         </ng-template>
-        <div>
+        <div class="word-form">
             <input type="text" [(ngModel)]="answer" placeholder="Your answer" />
             <button (click)="checkAnswer()">Check</button>
-            <div *ngIf="correctAnswer" style="color: red;">{{ correctAnswer }}</div>
         </div>
+        <div *ngIf="correctAnswer" class="error-message">❌ {{ correctAnswer }}</div>
+        <div *ngIf="isCorrect" class="success-message">✔️ Correct!</div>
     </ng-template>
 </div>

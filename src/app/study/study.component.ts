@@ -18,6 +18,8 @@ export class StudyComponent implements OnInit {
   answer: string = '';
   correctAnswer: string = '';
   noWordPairs: boolean = false;
+  isCorrect: boolean = false;
+  private readonly timeout: number = 2000;
 
   constructor(private wordPairService: WordpairService) { }
 
@@ -30,21 +32,23 @@ export class StudyComponent implements OnInit {
   }
 
   checkAnswer(): void {
-    let solution = (this.showKey ? this.currentWordPair.key : this.currentWordPair.value);
+    let solution = (this.showKey ? this.currentWordPair.value : this.currentWordPair.key);
     if (this.answer === solution) {
+      this.isCorrect = true;
       this.reset();
     } else {
       this.correctAnswer = solution;
-      setTimeout(() => {
-        this.reset();
-      }, 2000);
+      this.reset();
     }
   }
 
   reset(): void {
-    this.answer = '';
-    this.correctAnswer = '';
-    this.nextWordPair();
+    setTimeout(() => {
+      this.answer = '';
+      this.correctAnswer = '';
+      this.isCorrect = false;
+      this.nextWordPair();
+    }, this.timeout);
   }
 
   nextWordPair(): void {
