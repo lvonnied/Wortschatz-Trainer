@@ -17,12 +17,16 @@ export class StudyComponent implements OnInit {
   showKey: boolean = true;
   answer: string = '';
   correctAnswer: string = '';
+  noWordPairs: boolean = false;
 
   constructor(private wordPairService: WordpairService) { }
 
   ngOnInit(): void {
     this.currentWordPair = this.wordPairService.getRandomWordPair();
     this.showKey = Math.random() >= 0.5;
+    if (this.currentWordPair === undefined) {
+      this.noWordPairs = true;
+    }
   }
 
   checkAnswer(): void {

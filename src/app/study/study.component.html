@@ -1,14 +1,18 @@
 <div class="container">
-    <div *ngIf="showKey; else showValue">
-        <p>{{ currentWordPair.key }}</p>
+    <div *ngIf="noWordPairs; else showStudy">
+        <p>Please add some word pairs to study.</p>
     </div>
-    <ng-template #showValue>
-        <p>{{ currentWordPair.value }}</p>
+    <ng-template #showStudy>
+        <div *ngIf="showKey; else showValue">
+            <p>{{ currentWordPair.key }}</p>
+        </div>
+        <ng-template #showValue>
+            <p>{{ currentWordPair.value }}</p>
+        </ng-template>
+        <div>
+            <input type="text" [(ngModel)]="answer" placeholder="Your answer" />
+            <button (click)="checkAnswer()">Check</button>
+            <div *ngIf="correctAnswer" style="color: red;">{{ correctAnswer }}</div>
+        </div>
     </ng-template>
-
-    <div>
-        <input type="text" [(ngModel)]="answer" placeholder="Your answer" />
-        <button (click)="checkAnswer()">Check</button>
-        <div *ngIf="correctAnswer" style="color: red;">{{ correctAnswer }}</div>
-    </div>
 </div>
