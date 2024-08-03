@@ -1,4 +1,15 @@
 <div class="container">
+    <div class="word-form">
+        <input type="text" [(ngModel)]="key" placeholder="Front">
+        <input type="text" [(ngModel)]="value" placeholder="Back">
+        <button (click)="addWordPair()">Add</button>
+        <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+    </div>
+    <div class="button-container">
+        <button id="add-sample-button" (click)="addSampleData()">Add sample</button>
+        <button id="reset-list-button" (click)="deleteAllWordPairs()">Reset List</button>
+    </div>
+
     <div class="table-container">
         <table>
             <thead>
@@ -14,20 +25,10 @@
                     <td>{{ pair.value }}</td>
                     <td>
                         <button disabled>Edit</button>
-                        <button (click)="removeWordPair(i)">Delete</button>
+                        <button class="delete-buttons" (click)="removeWordPair(i)">Delete</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-
-    <div class="word-form">
-        <input type="text" [(ngModel)]="key" placeholder="Front">
-        <input type="text" [(ngModel)]="value" placeholder="Back">
-        <button (click)="addWordPair()">Add</button>
-    </div>
-
-    <button (click)="addSampleData()">Add sample</button>
-    <button (click)="deleteAllWordPairs()">Reset List</button>
-    <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
 </div>

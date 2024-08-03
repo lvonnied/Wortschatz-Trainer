@@ -1,12 +1,115 @@
 .container {
-    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+
+td>button {
+    margin: 0 5px;
+}
+
+th:last-child,
+td:last-child {
+    width: 150px;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
 }
 
 .word-form {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.word-form input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.word-form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.word-form button:hover {
+    background-color: #0056b3;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.delete-buttons {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-buttons:hover {
+    background-color: #c82333;
+}
+
+#add-sample-button {
+    background-color: #28a745;
+    color: white;
+}
+
+#add-sample-button:hover {
+    background-color: #218838;
+}
+
+#reset-list-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+#reset-list-button:hover {
+    background-color: #c82333;
 }
