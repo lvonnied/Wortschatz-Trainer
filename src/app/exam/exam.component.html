@@ -1,3 +1,25 @@
 <div class="container">
-    <button (click)="startExam()">Start Exam</button>
+    <button (click)="startExam()" *ngIf="!examStatus && !examFinished">Start Exam</button>
+    <div *ngIf="examStatus">
+        <div *ngIf="currentWordPair.key">
+            <div *ngIf="showKey; else showValue">
+                <p>{{ currentWordPair.key }}</p>
+            </div>
+            <ng-template #showValue>
+                <p>{{ currentWordPair.value }}</p>
+            </ng-template>
+            <div>
+                <input type="text" [(ngModel)]="answer" placeholder="Your answer" />
+                <button (click)="checkAnswer()">Check</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="examFinished">
+        <p>Exam Finished!</p>
+        <p>Correct Answers: {{ correctAnswers }}</p>
+        <p>Incorrect Answers: {{ incorrectAnswers }}</p>
+        <p>Total Questions: {{ correctAnswers + incorrectAnswers }}</p>
+        <p>Score: {{ (correctAnswers / (correctAnswers + incorrectAnswers)) * 100 | number:'1.0-2' }}%</p>
+        <button (click)="startExam()">Restart Exam</button>
+    </div>
 </div>
