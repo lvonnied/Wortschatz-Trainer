@@ -7,18 +7,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class WordpairService {
-  private wordPairsSubject = new BehaviorSubject<WordPair[]>([
-    { key: 'cat', value: 'Katze' },
-    { key: 'dog', value: 'Hund' },
-    { key: 'mouse', value: 'Maus' },
-    { key: 'elephant', value: 'Elefant' },
-    { key: 'horse', value: 'Pferd' },
-    { key: 'cow', value: 'Kuh' },
-    { key: 'rabbit', value: 'Kaninchen' },
-    { key: 'bird', value: 'Vogel' },
-    { key: 'fish', value: 'Fisch' },
-    { key: 'snake', value: 'Schlange' }
-  ]);
+  private wordPairsSubject = new BehaviorSubject<WordPair[]>([]);
   wordPairs$ = this.wordPairsSubject.asObservable();
 
   constructor(private randomWordService: RandomwordpairService) { }
