@@ -19,6 +19,10 @@ export class ExamComponent implements OnInit {
     this.examService.examStarted$.subscribe((started) => {
       this.examStatus = started;
     });
+    this.wordPairs = this.wordPairService.getWordPairs().slice();
+    if (this.wordPairs.length === 0) {
+      this.disableExam = true;
+    }
   }
 
   examStatus: boolean = false;
@@ -29,17 +33,9 @@ export class ExamComponent implements OnInit {
   correctAnswers: number = 0;
   incorrectAnswers: number = 0;
   examFinished: boolean = false;
+  disableExam: boolean = false;
 
   startExam() {
-    // ! Get a copy of the word pairs instead of a reference to the original array
-    this.wordPairs = this.wordPairService.getWordPairs().slice();
-
-    if (this.wordPairs.length === 0) {
-      // TODO Replace alert with a more user-friendly way to display messages
-      alert('No word pairs available to start the exam.');
-      return;
-    }
-
     this.examService.startExam();
     this.setAndRemoveRandomWordPair();
     this.examFinished = false;
