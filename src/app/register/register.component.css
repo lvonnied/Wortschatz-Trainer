@@ -96,6 +96,15 @@ button {
     background-color: #c82333;
 }
 
+.edit-buttons {
+    background-color: #ffc107;
+    color: black;
+}
+
+.edit-buttons:hover {
+    background-color: #e0a800;
+}
+
 #add-sample-button {
     background-color: #28a745;
     color: white;

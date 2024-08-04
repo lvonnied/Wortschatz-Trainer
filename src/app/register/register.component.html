@@ -24,7 +24,7 @@
                     <td>{{ pair.key }}</td>
                     <td>{{ pair.value }}</td>
                     <td>
-                        <button disabled>Edit</button>
+                        <button class="edit-buttons" (click)="editWordPair(i)">Edit</button>
                         <button class="delete-buttons" (click)="removeWordPair(i)">Delete</button>
                     </td>
                 </tr>

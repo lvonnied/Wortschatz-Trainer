@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WordpairService } from '../services/wordpair.service';
 import { WordPair } from '../models/WordPair';
+import { MatDialog } from '@angular/material/dialog';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +14,7 @@ import { WordPair } from '../models/WordPair';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  constructor(private wordPairService: WordpairService) {
+  constructor(private wordPairService: WordpairService, private dialog: MatDialog) {
     this.wordPairs = this.wordPairService.getWordPairs();
   }
 
@@ -52,6 +54,18 @@ export class RegisterComponent implements OnInit {
 
   addSampleData(): void {
     this.wordPairService.addSampleData();
+  }
+
+  editWordPair(index: number): void {
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      data: { key: this.wordPairs[index].key, value: this.wordPairs[index].value }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.wordPairService.editWordPair(index, result.key, result.value);
+      }
+    });
   }
 
 }
