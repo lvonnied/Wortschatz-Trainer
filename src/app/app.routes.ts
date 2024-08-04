@@ -7,4 +7,5 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'study', component: StudyComponent },
     { path: 'exam', component: ExamComponent },
+    { path: '**', component: RegisterComponent, pathMatch: 'full' }
 ];
