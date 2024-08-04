@@ -130,7 +130,7 @@ Create your own vocabulary lists and practice them with the Wortschatz-Trainer. 
 	- [x] Button um Beispieldaten einzufüllen
 	- [x] Button um alles zurückzusetzen
 	- [x] Bonus: Die Liste der Worpaare können für beide Sprachen sortiert werden
-	- [ ] Bonus: Wortliste persistieren (LocalStorage)
+	- [x] Bonus: Wortliste persistieren (LocalStorage)
 - [ ] Trainieren
 	- [x] Es wird zufällig die eine oder andere Sprache abgefragt
 	- [x] Wörter werden zufällig ausgewählt
