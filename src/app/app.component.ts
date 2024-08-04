@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ExamService } from './services/exam.service';
 
@@ -11,22 +11,22 @@ interface ILink {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, MatTabsModule],
+  imports: [RouterLink, RouterOutlet, MatTabsModule, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Wortschatz-Trainer';
   links: ILink[] = [
     { path: "register", label: "Register" },
     { path: "study", label: "Study" },
     { path: "exam", label: "Exam" },
   ];
-  activePath = this.links[0].path;
   examStarted = false;
 
-  // ? Does this belong in onInit?
-  constructor(private examService: ExamService) {
+  constructor(private examService: ExamService) { }
+
+  ngOnInit(): void {
     this.examService.examStarted$.subscribe((started) => {
       this.examStarted = started;
     });
