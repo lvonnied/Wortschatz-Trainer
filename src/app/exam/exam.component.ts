@@ -17,35 +17,35 @@ export class ExamComponent implements OnInit {
 
   ngOnInit(): void {
     this.examService.examStarted$.subscribe((started) => {
-      this.examStatus = started;
+      this.hasExamStarted = started;
     });
-    this.wordPairs = this.wordPairService.getWordPairs().slice();
+    this.wordPairs = this.wordPairService.getWordPairs().slice(); // ! Copy of the array instead of referencing it
     if (this.wordPairs.length === 0) {
-      this.disableExam = true;
+      this.isExamDisabled = true;
     }
   }
 
-  examStatus: boolean = false;
+  hasExamStarted: boolean = false;
   wordPairs: WordPair[] = [];
   currentWordPair: WordPair = { key: '', value: '' };
   showKey: boolean = true;
   answer: string = '';
-  correctAnswers: number = 0;
-  incorrectAnswers: number = 0;
-  examFinished: boolean = false;
-  disableExam: boolean = false;
+  amountOfCorrectAnswers: number = 0;
+  amountOfIncorrectAnswers: number = 0;
+  isExamFinished: boolean = false;
+  isExamDisabled: boolean = false;
 
   startExam() {
     this.examService.startExam();
     this.setAndRemoveRandomWordPair();
-    this.examFinished = false;
-    this.correctAnswers = 0;
-    this.incorrectAnswers = 0;
+    this.isExamFinished = false;
+    this.amountOfCorrectAnswers = 0;
+    this.amountOfIncorrectAnswers = 0;
   }
 
   endExam() {
     this.examService.resetExam();
-    this.examFinished = true;
+    this.isExamFinished = true;
   }
 
   setAndRemoveRandomWordPair(): void {
@@ -65,9 +65,9 @@ export class ExamComponent implements OnInit {
   checkAnswer(): void {
     const expectedAnswer = this.showKey ? this.currentWordPair.value : this.currentWordPair.key;
     if (this.answer.trim().toLowerCase() === expectedAnswer.trim().toLowerCase()) {
-      this.correctAnswers++;
+      this.amountOfCorrectAnswers++;
     } else {
-      this.incorrectAnswers++;
+      this.amountOfIncorrectAnswers++;
     }
     this.setAndRemoveRandomWordPair();
   }
