@@ -32,14 +32,18 @@ button:hover {
     background-color: #0056b3;
 }
 
-.success-message {
+.success-message,
+.error-message {
     color: green;
     margin-top: 10px;
+    position: absolute;
+    bottom: 250px;
+    width: 100%;
+    text-align: center;
 }
 
 .error-message {
     color: red;
-    margin-top: 10px;
 }
 
 .word-display {
