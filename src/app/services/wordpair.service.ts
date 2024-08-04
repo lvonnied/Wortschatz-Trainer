@@ -15,7 +15,6 @@ export class WordpairService {
 
   private getWordPairsFromLocalStorage(): WordPair[] {
     const data = localStorage.getItem(this.localStorageKey);
-    console.log('data', data);
     return data ? JSON.parse(data) : [];
   }
 
