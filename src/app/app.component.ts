@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ExamService } from './services/exam.service';
-
-interface ILink {
-  path: string;
-  label: string;
-}
+import { ILink } from './models/ILink';
 
 @Component({
   selector: 'app-root',
