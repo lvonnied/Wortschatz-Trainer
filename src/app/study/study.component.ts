@@ -13,27 +13,29 @@ import { FormsModule } from '@angular/forms';
 })
 export class StudyComponent implements OnInit {
 
-  currentWordPair: WordPair = { key: '', value: '' };
-  showKey: boolean = true;
-  answer: string = '';
-  correctAnswer: string = '';
-  noWordPairs: boolean = false;
-  isCorrect: boolean = false;
-  private readonly timeout: number = 2000;
-
   constructor(private wordPairService: WordpairService) { }
 
   ngOnInit(): void {
     this.currentWordPair = this.wordPairService.getRandomWordPair();
-    this.showKey = Math.random() >= 0.5;
+    this.showKey = Math.random() >= this.percentage;
     if (this.currentWordPair === undefined) {
       this.noWordPairs = true;
     }
   }
 
+  private readonly timeout: number = 2000;
+  private readonly percentage: number = 0.5;
+
+  currentWordPair: WordPair = { key: '', value: '' };
+  showKey: boolean = true;
+  userAnswer: string = '';
+  correctAnswer: string = '';
+  noWordPairs: boolean = false;
+  isCorrect: boolean = false;
+
   checkAnswer(): void {
     let solution = (this.showKey ? this.currentWordPair.value : this.currentWordPair.key);
-    if (this.answer === solution) {
+    if (this.userAnswer === solution) {
       this.isCorrect = true;
       this.reset();
     } else {
@@ -44,7 +46,7 @@ export class StudyComponent implements OnInit {
 
   reset(): void {
     setTimeout(() => {
-      this.answer = '';
+      this.userAnswer = '';
       this.correctAnswer = '';
       this.isCorrect = false;
       this.nextWordPair();
@@ -53,7 +55,7 @@ export class StudyComponent implements OnInit {
 
   nextWordPair(): void {
     this.currentWordPair = this.wordPairService.getRandomWordPair();
-    this.showKey = Math.random() >= 0.5;
+    this.showKey = Math.random() >= this.percentage;
   }
 
 }

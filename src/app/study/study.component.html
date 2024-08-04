@@ -12,7 +12,7 @@
             </div>
         </ng-template>
         <div class="word-form">
-            <input type="text" [(ngModel)]="answer" placeholder="Your answer" />
+            <input type="text" [(ngModel)]="userAnswer" placeholder="Your answer" />
             <button (click)="checkAnswer()">Check</button>
         </div>
         <div *ngIf="correctAnswer" class="error-message">❌ {{ correctAnswer }}</div>
