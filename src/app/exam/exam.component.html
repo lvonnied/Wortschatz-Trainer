@@ -1,17 +1,17 @@
 <div class="container">
     <button (click)="startExam()" *ngIf="!examStatus && !examFinished">Start Exam</button>
-    <div *ngIf="examStatus">
-        <div *ngIf="currentWordPair.key">
-            <div *ngIf="showKey; else showValue">
-                <p>{{ currentWordPair.key }}</p>
-            </div>
-            <ng-template #showValue>
+    <div *ngIf="examStatus" class="container">
+        <div *ngIf="showKey; else showValue" class="word-display">
+            <p>{{ currentWordPair.key }}</p>
+        </div>
+        <ng-template #showValue>
+            <div class="word-display">
                 <p>{{ currentWordPair.value }}</p>
-            </ng-template>
-            <div>
-                <input type="text" [(ngModel)]="answer" placeholder="Your answer" />
-                <button (click)="checkAnswer()">Check</button>
             </div>
+        </ng-template>
+        <div class="word-form">
+            <input type="text" [(ngModel)]="answer" placeholder="Your answer" />
+            <button (click)="checkAnswer()">Check</button>
         </div>
     </div>
     <div *ngIf="examFinished">
